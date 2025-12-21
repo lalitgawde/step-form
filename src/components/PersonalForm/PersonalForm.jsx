@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "./PersonalForm.module.css";
+import eyeIcon from "../../assets/eye.png";
+import hiddenEyeIcon from "../../assets/hidden.png";
 
 const INTIALDATA = {
   fullName: "",
@@ -11,6 +13,7 @@ const INTIALDATA = {
 // const NO_OF_FIELDS = Object.keys(INTIALDATA).length;
 
 export default function PersonalForm({ setStepperDataHandler, allData }) {
+  const [showPassword, setShowPassword] = useState(false);
   const [enteredData, setEnteredData] = useState(
     Object.keys(allData).includes("personalData") &&
       Object.values(allData.personalData).length > 0
@@ -48,6 +51,21 @@ export default function PersonalForm({ setStepperDataHandler, allData }) {
           value={enteredData.email}
         />
       </div>
+      <div className={styles.subContainer} style={{ position: "relative" }}>
+        <label htmlFor="password">Password</label>
+        <input
+          type={showPassword ? "text" : "password"}
+          name="password"
+          placeholder="Enter Password"
+          onChange={onChangeHandler}
+          value={enteredData.password}
+        />
+        <img
+          src={showPassword ? hiddenEyeIcon : eyeIcon}
+          onClick={() => setShowPassword(!showPassword)}
+          className={styles.showpassword}
+        />
+      </div>
       <div className={styles.subContainer}>
         <label htmlFor="gender">Gender</label>
         <select
@@ -60,16 +78,6 @@ export default function PersonalForm({ setStepperDataHandler, allData }) {
           <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
-      </div>
-      <div className={styles.subContainer}>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          onChange={onChangeHandler}
-          value={enteredData.password}
-        />
       </div>
     </div>
   );
