@@ -5,33 +5,6 @@ import EducationForm from "./components/EducationForm/EducationForm";
 import EmployementForm from "./components/EmployementForm/EmployementForm";
 import OtherInfoForm from "./components/OtherInfoForm/OtherInfoForm";
 
-const stepArray = [
-  {
-    stepCount: 1,
-    stepName: "Personal Info",
-    value: "personalData",
-    component: <PersonalForm />,
-  },
-  {
-    stepCount: 2,
-    stepName: "Education Info",
-    value: "educationData",
-    component: <EducationForm />,
-  },
-  {
-    stepCount: 3,
-    stepName: "Employment Info",
-    value: "employementData",
-    component: <EmployementForm />,
-  },
-  {
-    stepCount: 4,
-    stepName: "Other Info",
-    value: "otherInfo",
-    component: <OtherInfoForm />,
-  },
-];
-
 function App() {
   const [allData, setAllData] = useState({});
   const [step, setStep] = useState(1);
@@ -58,11 +31,6 @@ function App() {
     setActiveStep([1]);
     setAllData({});
   };
-  let isNextEnabled =
-    allData?.hasOwnProperty(stepArray[step - 1].value) &&
-    Object.values(allData[stepArray[step - 1].value]).every(
-      (value) => value.trim() !== ""
-    );
 
   const setStepperDataHandler = (name, Data) => {
     setAllData((allData) => ({
@@ -70,6 +38,60 @@ function App() {
       [name]: Data,
     }));
   };
+
+  const stepArray = [
+    {
+      stepCount: 1,
+      stepName: "Personal Info",
+      value: "personalData",
+      component: (
+        <PersonalForm
+          setStepperDataHandler={setStepperDataHandler}
+          allData={allData}
+        />
+      ),
+    },
+    {
+      stepCount: 2,
+      stepName: "Education Info",
+      value: "educationData",
+      component: (
+        <EducationForm
+          setStepperDataHandler={setStepperDataHandler}
+          allData={allData}
+        />
+      ),
+    },
+    {
+      stepCount: 3,
+      stepName: "Employment Info",
+      value: "employementData",
+      component: (
+        <EmployementForm
+          setStepperDataHandler={setStepperDataHandler}
+          allData={allData}
+        />
+      ),
+    },
+    {
+      stepCount: 4,
+      stepName: "Other Info",
+      value: "otherInfo",
+      component: (
+        <OtherInfoForm
+          setStepperDataHandler={setStepperDataHandler}
+          allData={allData}
+          onCancel={onCancel}
+        />
+      ),
+    },
+  ];
+
+  let isNextEnabled =
+    allData?.hasOwnProperty(stepArray[step - 1].value) &&
+    Object.values(allData[stepArray[step - 1].value]).every(
+      (value) => value.trim() !== ""
+    );
 
   console.log("isNextEnabled", isNextEnabled);
 
@@ -94,7 +116,7 @@ function App() {
         })}
       </div>
       <div className="content">
-        {step === 1 && (
+        {/* {step === 1 && (
           <PersonalForm
             setStepperDataHandler={setStepperDataHandler}
             allData={allData}
@@ -118,7 +140,8 @@ function App() {
             allData={allData}
             setStepperDataHandler={setStepperDataHandler}
           />
-        )}
+        )} */}
+        {stepArray[step - 1].component}
       </div>
       <div className="actions">
         <button onClick={onPreviousHandler} disabled={step < 2}>
