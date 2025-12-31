@@ -1,4 +1,5 @@
 import React from "react";
+import tickMarkIcon from "../../assets/tick.png";
 
 export default function Step({ stepCount, activeStep, totalStep }) {
   return (
@@ -6,7 +7,14 @@ export default function Step({ stepCount, activeStep, totalStep }) {
       <div
         className={`circle ${activeStep.includes(stepCount) ? "active" : ""}`}
       >
-        {stepCount}
+        {stepCount >= Math.max(...activeStep) ? stepCount : null}
+        {stepCount < Math.max(...activeStep) && (
+          <img
+            src={tickMarkIcon}
+            alt="tick mark"
+            style={{ width: "15px", height: "15px", color: "white" }}
+          />
+        )}
       </div>
       {stepCount < totalStep && (
         <div
