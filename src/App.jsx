@@ -115,34 +115,7 @@ function App() {
           return <div key={stepItem.stepName}>{stepItem.stepName}</div>;
         })}
       </div>
-      <div className="content">
-        {/* {step === 1 && (
-          <PersonalForm
-            setStepperDataHandler={setStepperDataHandler}
-            allData={allData}
-          />
-        )}
-        {step === 2 && (
-          <EducationForm
-            setStepperDataHandler={setStepperDataHandler}
-            allData={allData}
-          />
-        )}
-        {step === 3 && (
-          <EmployementForm
-            setStepperDataHandler={setStepperDataHandler}
-            allData={allData}
-          />
-        )}
-        {step === 4 && (
-          <OtherInfoForm
-            onCancel={onCancel}
-            allData={allData}
-            setStepperDataHandler={setStepperDataHandler}
-          />
-        )} */}
-        {stepArray[step - 1].component}
-      </div>
+      <div className="content">{stepArray[step - 1].component}</div>
       <div className="actions">
         <button onClick={onPreviousHandler} disabled={step < 2}>
           Previous

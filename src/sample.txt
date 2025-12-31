@@ -1,0 +1,32 @@
+{/* {step === 1 && (
+          <PersonalForm
+            setStepperDataHandler={setStepperDataHandler}
+            allData={allData}
+          />
+        )}
+        {step === 2 && (
+          <EducationForm
+            setStepperDataHandler={setStepperDataHandler}
+            allData={allData}
+          />
+        )}
+        {step === 3 && (
+          <EmployementForm
+            setStepperDataHandler={setStepperDataHandler}
+            allData={allData}
+          />
+        )}
+        {step === 4 && (
+          <OtherInfoForm
+            onCancel={onCancel}
+            allData={allData}
+            setStepperDataHandler={setStepperDataHandler}
+          />
+        )} */}
+
+
+        {
+          !activeStep.includes(stepCount) ||
+          activeStep.length === 1 ||
+          stepCount >= Math.max(...activeStep) ? stepCount : null
+        }
